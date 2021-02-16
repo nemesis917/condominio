@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Empresa;
 
-class homeController extends Controller
+class empresaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class homeController extends Controller
      */
     public function index()
     {
-        return view('system.home.index');
+        return view('system.empresa.index');
     }
 
     /**
@@ -34,7 +35,15 @@ class homeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'empresa' => 'required|max:80'
+        ]);
+        
+        $data = new Empresa;
+        $data->empresa = $request->empresa;
+        $data->users_id = \Auth::user()->id;
+        $save = $data->save();
+
     }
 
     /**
