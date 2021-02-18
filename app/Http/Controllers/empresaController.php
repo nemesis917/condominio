@@ -97,4 +97,16 @@ class empresaController extends Controller
     {
         //
     }
+
+    // ---------------- jquery -------------------
+
+        public function jq_consultarEmpresa()
+        {
+            $query = Empresa::select('empresa')->orderBy('id', 'desc')->get();
+
+            return datatables()->of($query)->make(true)
+            ->addColumn('btn','')
+            ->rawColumns(['btn'])->toJson();
+        }
+
 }
