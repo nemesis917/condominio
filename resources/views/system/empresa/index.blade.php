@@ -17,18 +17,18 @@ Bienvenido al sistema
 <div class="container">
     <div class="row base">
         <div class="col-md-4">
-            
-            <div class="small-box bg-info">
-                <div class="inner">
-                  <h3>Consultar las<br>empresas</h3>
-  
-                  <p>Empresas existentes: </p>
+            <a href="{{ route('empresa.consultar') }}">
+                <div class="small-box bg-info">
+                    <div class="inner">
+                      <h3>Consultar las<br>empresas</h3>
+      
+                      <p>Empresas existentes: </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
                 </div>
-                <div class="icon">
-                    <i class="fas fa-briefcase"></i>
-                </div>
-            </div>
-
+            </a>
         </div>
         <div class="col-md-4">
             
@@ -81,9 +81,11 @@ Bienvenido al sistema
                       </tr>
                       </thead>
                       <tbody>
+                        @foreach ($empresa as $emp)
                         <tr>
-                            <td>Nombre de la empresa</td>
+                            <td>{{ $emp->empresa }}</td>
                         </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -92,7 +94,7 @@ Bienvenido al sistema
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                   <a href="javascript:void(0)"  data-toggle="modal" data-target="#registrarEmpresa"  class="btn btn-sm btn-info float-left">Registrar nueva empresa</a>
-                  <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">Ver empresas</a>
+                  <a href="{{ route('empresa.consultar') }}" class="btn btn-sm btn-secondary float-right">Ver empresas</a>
                 </div>
                 <!-- /.card-footer -->
             </div>
@@ -140,6 +142,26 @@ Bienvenido al sistema
     <script>alert('hubo un error que no permite almacenar el nombre de la empresa')</script>
 @endif
 
+
+@if (session('mensaje'))
+    @if (session('mensaje') == 1)
+        <script>
+            Swal.fire(
+                'Solicitud procesada!',
+                'Se ha cargado la información',
+                'success'
+            )
+        </script>
+    @else
+    <script>
+        Swal.fire(
+            'Hubo un error',
+            'La información no fue salvada',
+            'error'
+        )
+    </script>
+    @endif
+@endif
  
 <form action="{{ route('empresa.guardar') }}" method="post" class="base">
     @csrf
@@ -155,7 +177,7 @@ Bienvenido al sistema
             <div class="modal-body">
               <div class="form-group">
                     <label for="empresa">Inguese el nombre de la empresa</label>
-                    <input type="text"class="form-control" name="empresa" id="empresa" maxlength="80">
+                    <input type="text"class="form-control" name="empresa" id="empresa" maxlength="80" placeholder="Ingrese el nombre de la empresa" required>
               </div>
             </div>
             <div class="modal-footer">

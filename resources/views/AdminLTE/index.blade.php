@@ -6,6 +6,11 @@
   <title>@yield('titulo', 'Sistema administrativo')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- jQuery -->
+<script src="{{ asset('layout/plugins/jquery/jquery.min.js') }}"></script>
+  <!-- Datatables -->
+  <link rel="stylesheet" href="{{ asset('layout/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('layout/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('layout/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
@@ -26,7 +31,10 @@
   <link rel="stylesheet" href="{{ asset('layout/plugins/summernote/summernote-bs4.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="{{ asset('system/fonts/fuente.css') }}?family=Source+Sans+Pro:300,400,400i,700">
+  @yield('css')
   <link rel="stylesheet" href="{{ asset('system/base.css') }}">
+  <!-- sweet alert -->
+  <script src="{{ asset('plugins/sweetalert/js/sweetCDN.js') }}"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -737,8 +745,7 @@
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
+    <strong>Copyright &copy; 2021 - {{ date('Y') }} Todos los derechos reservados.</strong>
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.0.5
     </div>
@@ -752,8 +759,7 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="{{ asset('layout/plugins/jquery/jquery.min.js') }}"></script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('layout/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -765,7 +771,12 @@
 <!-- ChartJS -->
 <script src="{{ asset('layout/plugins/chart.js/Chart.min.js') }}"></script>
 <!-- Sparkline -->
-<script src="{{ asset('layout/plugins/sparklines/sparkline.js') }}"></script>
+{{-- <script src="{{ asset('layout/plugins/sparklines/sparkline.js') }}"></script> --}}
+<!-- Datatables JS -->
+<script src="{{ asset('layout/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('layout/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('layout/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('layout/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
 <!-- JQVMap -->
 <script src="{{ asset('layout/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
 <script src="{{ asset('layout/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
@@ -783,8 +794,9 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('layout/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('layout/dist/js/pages/dashboard.js') }}"></script>
+{{-- <script src="{{ asset('layout/dist/js/pages/dashboard.js') }}"></script> --}}
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('layout/dist/js/demo.js') }}"></script>
+@yield('javascript')
 </body>
 </html>

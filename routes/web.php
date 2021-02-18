@@ -33,4 +33,5 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 Route::group(['prefix' => 'empresa','middleware' => ['auth']], function () {
     Route::get('/', [empresaController::class, "index"])->name('empresa.index');
     Route::post('/cargarEmpresa', [empresaController::class, "store"])->name('empresa.guardar');
+    Route::get('/consultar-datos-empresa', [empresaController::class, "consultar"])->name('empresa.consultar');
 });

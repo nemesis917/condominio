@@ -14,7 +14,8 @@ class empresaController extends Controller
      */
     public function index()
     {
-        return view('system.empresa.index');
+        $data = Empresa::select('empresa')->limit(5)->orderBy('id', 'desc')->get();
+        return view('system.empresa.index')->with('empresa', $data);
     }
 
     /**
@@ -22,9 +23,9 @@ class empresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function consultar()
     {
-        //
+        return view('system.empresa.consultar');
     }
 
     /**
@@ -43,6 +44,12 @@ class empresaController extends Controller
         $data->empresa = $request->empresa;
         $data->users_id = \Auth::user()->id;
         $save = $data->save();
+
+        if ($save) {
+            return back()->with('mensaje', "1");
+        } else {
+            return back()->with('mensaje', '2');
+        }
 
     }
 
