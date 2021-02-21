@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Empresa;
+use DataTables;
 
 class empresaController extends Controller
 {
@@ -53,15 +54,21 @@ class empresaController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function modify(Request $request)
     {
-        //
+        $request->validate([
+            'empresa' => 'required|max:80'
+        ]);
+        $emp = Empresa::find($request->data);
+        $emp->empresa = $request->empresa;
+        $emp->users_id = \Auth::user()->id;
+        $emp->updated_at = now();
+        $val = $emp->update();
+        if ($val) {
+            return back()->with('mensaje', "1");
+        } else {
+            dd("algo se daño");
+        }
     }
 
     /**
@@ -102,11 +109,32 @@ class empresaController extends Controller
 
         public function jq_consultarEmpresa()
         {
-            $query = Empresa::select('empresa')->orderBy('id', 'desc')->get();
 
-            return datatables()->of($query)->make(true)
-            ->addColumn('btn','')
-            ->rawColumns(['btn'])->toJson();
+            $query = Empresa::select('id','empresa')->orderBy('id', 'desc')->get();
+            return Datatables::of($query)
+                    ->addIndexColumn()
+                    ->addColumn('btn', 'system.empresa.btn.btnConsultar')
+                    ->rawColumns(['btn'])
+                    ->make(true);
+
+            // $query = Empresa::select('empresa')->orderBy('id', 'desc')->get();
+            // return Datatables::of($query)
+            //         ->addIndexColumn()
+            //         ->addColumn('btn', function($row){
+            //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+            //         return $btn;
+            //         })
+            //         ->rawColumns(['btn'])
+            //         ->make(true);
+
         }
+
+        public function jq_consult(Request $request)
+        {
+            $emp = Empresa::find($request->id);
+            return response()->json($emp);
+        }
+
+
 
 }

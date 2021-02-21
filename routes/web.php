@@ -35,4 +35,7 @@ Route::group(['prefix' => 'empresa','middleware' => ['auth']], function () {
     Route::post('/cargarEmpresa', [empresaController::class, "store"])->name('empresa.guardar');
     Route::get('/consultar-datos-empresa', [empresaController::class, "consultar"])->name('empresa.consultar');
     Route::get('/ajax/consultarEmpresa', [empresaController::class, "jq_consultarEmpresa"]);
+    Route::post('/ajax/consultarUnaEmpresa', [empresaController::class, "jq_consult"]);
+    Route::post('/modificarEmpresa', [empresaController::class, "modify"])->name('empresa.modificar');
 });
+

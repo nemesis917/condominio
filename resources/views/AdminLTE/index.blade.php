@@ -6,6 +6,7 @@
   <title>@yield('titulo', 'Sistema administrativo')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- jQuery -->
 <script src="{{ asset('layout/plugins/jquery/jquery.min.js') }}"></script>
   <!-- Datatables -->
@@ -33,8 +34,6 @@
   <link rel="stylesheet" href="{{ asset('system/fonts/fuente.css') }}?family=Source+Sans+Pro:300,400,400i,700">
   @yield('css')
   <link rel="stylesheet" href="{{ asset('system/base.css') }}">
-  <!-- sweet alert -->
-  <script src="{{ asset('plugins/sweetalert/js/sweetCDN.js') }}"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -747,7 +746,7 @@
   <footer class="main-footer">
     <strong>Copyright &copy; 2021 - {{ date('Y') }} Todos los derechos reservados.</strong>
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.5
+      <b>Version</b> 1.0.0
     </div>
   </footer>
 
@@ -757,9 +756,6 @@
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
-
-
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('layout/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -797,6 +793,8 @@
 {{-- <script src="{{ asset('layout/dist/js/pages/dashboard.js') }}"></script> --}}
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('layout/dist/js/demo.js') }}"></script>
+<!-- sweet alert -->
+<script src="{{ asset('plugins/sweetalert/js/sweetCDN.js') }}"></script>
 @yield('javascript')
 </body>
 </html>

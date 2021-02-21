@@ -1,3 +1,19 @@
 .base {
     font-size: 20px;
 }
+
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 3.5em;
+    display: inline-block;
+    width: auto;
+    margin-left: -4px !important;
+}
+
+.btn-dark {
+    background-color: #695d5d;
+}
+
+.btn-warning {
+    background-color: #a6a02e;
+}
+
