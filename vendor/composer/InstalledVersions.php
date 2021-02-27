@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '71cf45cc1f70c0f8d03a383002b6c314db11509a',
+    'reference' => '69648331a8dd5d529faa9c35af69de4869f2d12e',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -477,7 +477,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '71cf45cc1f70c0f8d03a383002b6c314db11509a',
+      'reference' => '69648331a8dd5d529faa9c35af69de4869f2d12e',
     ),
     'laravel/sail' => 
     array (
@@ -1275,6 +1275,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'b43b05cf43c1b6d849478965062b6ef73e223bb5',
+    ),
+    'uxweb/sweet-alert' => 
+    array (
+      'pretty_version' => '2.0.5',
+      'version' => '2.0.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e9eb83d7d991de0fcb74398a698e0cdfef6d189d',
     ),
     'vlucas/phpdotenv' => 
     array (

@@ -6,7 +6,7 @@ $(function () {
                 {data: 'btn', name: 'btn', orderable: false, searchable: false},
             ],
             "language" : {
-                url: '../plugins/datatables/js/espanol.json'
+                url: '../../plugins/datatables/js/espanol.json'
             },
         "bLengthChange": false,
         "order": [[ 0, "desc" ]],
@@ -16,7 +16,9 @@ $(function () {
 
 });
 
-$(document).on('click','#ver', function(){
+$(document).on('click','#verConsulta', function(){
+    $('#empresa').val('');
+    $('#data').val('');
     let ver = $(this).val();
     $.ajax({
         url: 'ajax/consultarUnaEmpresa',
@@ -34,13 +36,47 @@ $(document).on('click','#ver', function(){
         }
     })
     .fail( function(){
-        console.log("fallo el ajax");
+        console.log("fallo el ajax en el ID ver");
     })
-    // alert(ver);
+
 });
 
-$(document).on('click','#borrar', function(){
-    let eliminar = "El numero a eliminar es " + $(this).val();
-    console.log(eliminar);
-    alert(eliminar);
+$(document).on('click','#borrarConsulta', function(){
+    let eliminar = $(this).val();
+
+    Swal.fire({
+        title: '¿Esta usted seguro',
+        text: "de querer eliminar esta empresa?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: 'ajax/eliminarUnaEmpresa',
+                type: 'POST',
+                dataType: 'json',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {id: eliminar}
+            })
+            .done(function(comp) {
+                if (comp) {
+                    $('#consultarEmpresa').DataTable().ajax.reload();
+                    Swal.fire(
+                        'Se ha eliminado',
+                        'de manera satisfactoria',
+                        'success'
+                      )
+                }
+            })
+            .fail( function(){
+                console.log("fallo el ajax en el ID eliminar");
+            })
+        }
+      })    
+
+    
 });

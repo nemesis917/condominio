@@ -16,4 +16,10 @@ class Empresa extends Model
         'users_id'
     ];
 
+    public function edificios()
+    {
+        return $this->belongsToMany('App\Models\Edificio')->withTimestamps();
+    }
+
+
 }

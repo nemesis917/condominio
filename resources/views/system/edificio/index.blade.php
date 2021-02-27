@@ -8,8 +8,7 @@ Bienvenido al sistema
 @endsection
 
 @section('cabDerecha')
-<i class="far fa-building"> Empresa </i>
-<i class="fas fa-angle-left"> Edificio  </i>
+<i class="far fa-building"> Edificio  </i>
 @endsection
 
 @section('body')
@@ -31,18 +30,18 @@ Bienvenido al sistema
             </a>
         </div>
         <div class="col-md-4">
-            
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3>Datos de <br>edificios</h3>
-  
-                  <p>Edificios cargados: </p>
-                </div>
-                <div class="icon">
-                    <i class="far fa-building"></i>
-                </div>
-            </div>
+        <a href="{{ route('edificio.index') }}">
+          <div class="small-box bg-success">
+            <div class="inner">
+                <h3>Datos de <br>edificios</h3>
 
+              <p>Edificios cargados: </p>
+            </div>
+            <div class="icon">
+                <i class="far fa-building"></i>
+            </div>
+        </div>        
+        </a>
         </div>
         <div class="col-md-4">
             
@@ -145,13 +144,13 @@ Bienvenido al sistema
 
 @if (session('mensaje'))
     @if (session('mensaje') == 1)
-        <script>
-            Swal.fire(
-                'Solicitud procesada!',
-                'Se ha cargado la información',
-                'success'
-            )
-        </script>
+    <script>
+      Swal.fire(
+      'Solicitud procesada!',
+      'Se ha atendido su solicitud satisfactoriamente',
+      'success'
+    )
+    </script>
     @else
     <script>
         Swal.fire(

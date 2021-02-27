@@ -1,0 +1,3 @@
+-- Alterar la tabla edificio / codigo_edificio para que permita zeros delante de los numeros
+ALTER TABLE books CHANGE reference reference INT(2) UNSIGNED ZEROFILL NOT NULL
+

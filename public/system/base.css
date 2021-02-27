@@ -1,12 +1,14 @@
+
+
 .base {
-    font-size: 20px;
+    /* font-size: 20px; */
 }
 
 .dataTables_wrapper .dataTables_filter input {
-    margin-left: 3.5em;
+    margin-left: 0.5em;
     display: inline-block;
     width: auto;
-    margin-left: -4px !important;
+    margin-left: -8px !important;
 }
 
 .btn-dark {

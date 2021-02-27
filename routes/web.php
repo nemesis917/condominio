@@ -3,6 +3,7 @@
 use App\Http\Controllers\webController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\empresaController;
+use App\Http\Controllers\edificioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,12 +31,23 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', [homeController::class, "index"])->name('dashboard');
 });
 
-Route::group(['prefix' => 'empresa','middleware' => ['auth']], function () {
+Route::group(['prefix' => 'sistema/empresa','middleware' => ['auth']], function () {
     Route::get('/', [empresaController::class, "index"])->name('empresa.index');
     Route::post('/cargarEmpresa', [empresaController::class, "store"])->name('empresa.guardar');
     Route::get('/consultar-datos-empresa', [empresaController::class, "consultar"])->name('empresa.consultar');
     Route::get('/ajax/consultarEmpresa', [empresaController::class, "jq_consultarEmpresa"]);
     Route::post('/ajax/consultarUnaEmpresa', [empresaController::class, "jq_consult"]);
     Route::post('/modificarEmpresa', [empresaController::class, "modify"])->name('empresa.modificar');
+    Route::post('/ajax/eliminarUnaEmpresa', [empresaController::class, "destroy"]);
+});
+
+Route::group(['prefix' => 'sistema/edificio','middleware' => ['auth']], function () {
+    Route::get('/', [edificioController::class, "index"])->name('edificio.index');
+    Route::get('/ajax/consulta', [edificioController::class, "jq_consulta"]);
+    Route::post('/guardar-edificio', [edificioController::class, "store"])->name('edificio.guardar');
+    Route::post('ajax/modificarUnaEmpresa', [edificioController::class, "jq_modificarUnaEmpresa"]);
+    Route::post('modificarDatosEmpresa', [edificioController::class, "update"])->name('edificio.modificar');
+    Route::post('ajax/eliminarUnEdificio', [edificioController::class, "destroy"]);
+    
 });
 

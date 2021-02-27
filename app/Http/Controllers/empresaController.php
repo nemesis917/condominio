@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Empresa;
 use DataTables;
+use UxWeb\SweetAlert\SweetAlert;
 
 class empresaController extends Controller
 {
@@ -16,7 +17,7 @@ class empresaController extends Controller
     public function index()
     {
         $data = Empresa::select('empresa')->limit(5)->orderBy('id', 'desc')->get();
-        return view('system.empresa.index')->with('empresa', $data);
+        return view('system.edificio.index')->with('empresa', $data);
     }
 
     /**
@@ -26,6 +27,7 @@ class empresaController extends Controller
      */
     public function consultar()
     {
+        // alert('Success Message', 'Optional Title');
         return view('system.empresa.consultar');
     }
 
@@ -71,38 +73,18 @@ class empresaController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroy(Request $request) 
     {
-        //
-    }
+        $emp = Empresa::find($request->id);
+        $del = $emp->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if ($del) {
+            return response()->json(1);
+        } else {
+            return response()->json(2);
+        }
+
     }
 
     // ---------------- jquery -------------------
@@ -117,15 +99,7 @@ class empresaController extends Controller
                     ->rawColumns(['btn'])
                     ->make(true);
 
-            // $query = Empresa::select('empresa')->orderBy('id', 'desc')->get();
-            // return Datatables::of($query)
-            //         ->addIndexColumn()
-            //         ->addColumn('btn', function($row){
-            //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-            //         return $btn;
-            //         })
-            //         ->rawColumns(['btn'])
-            //         ->make(true);
+
 
         }
 

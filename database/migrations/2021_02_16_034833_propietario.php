@@ -38,17 +38,17 @@ class Propietario extends Migration
 
             $table->foreign('usuario_id')->references('id')->on('users');
             $table->foreign('apartamento_id')->references('id')->on('apartamento');
-            // $table->timestamps();
+            $table->timestamps();
         });
 
-        Schema::create('empresa_edificio', function (Blueprint $table) {
+        Schema::create('edificio_empresa', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('empresa_id')->unsigned();
             $table->bigInteger('edificio_id')->unsigned();
 
             $table->foreign('empresa_id')->references('id')->on('empresa');
             $table->foreign('edificio_id')->references('id')->on('edificio');
-            // $table->timestamps();
+            $table->timestamps();
         });
 
     }
@@ -60,7 +60,7 @@ class Propietario extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empresa_edificio');
+        Schema::dropIfExists('edificio_empresa');
         Schema::dropIfExists('usuario_apartamento');
         Schema::dropIfExists('edificio_apartamento');
         Schema::dropIfExists('apartamento');
