@@ -121,7 +121,7 @@ class edificioController extends Controller
             'cheque' => 'required|max:6|between:0,100.00',
             'comentario' => 'required|max:200'            
         ]);
-
+        
         $edif = Edificio::find($request->data);
 
         $edif->codigo_edificio = $request->codigoE;
@@ -139,6 +139,10 @@ class edificioController extends Controller
         $edif->updated_at = now();
         $res = $edif->update();
 
+        $id_empresa = $edif->empresa[0]['id'];
+        $edif->empresa()->updateExistingPivot($id_empresa, 
+        ['empresa_id' => $request->modificarEmpresa]);
+
         if ($res) {
             return redirect()->route('edificio.index')->with('mensaje', 1);
         } else {
@@ -153,9 +157,20 @@ class edificioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        dd("Vamos super bien");
+        $edif = Edificio::find($request->id);
+        $id_empresa = $edif->empresa[0]['id'];
+        $edif->empresa()->detach($id_empresa);
+
+
+        $res = $edif->delete();
+        if ($res) {
+            return response()->json(1);
+        } else {
+            return response()->json(2);
+        }
+
     }
 
 //---------------- jquery ------------------

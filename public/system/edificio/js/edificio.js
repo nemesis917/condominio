@@ -156,7 +156,7 @@ $('form').submit(function(){
     $('#modificarEsteDat').attr('value', "Modificando...");
     $('#guar').attr('value', "Guardando...");
     $(this).find(':submit').attr('disabled','disabled');
-  });
+});
 
 
 
@@ -184,17 +184,28 @@ $('form').submit(function(){
             })
             .done(function(comp) {
                 if (comp) {
-                    console.log(comp);
-                    // $('#consultarEmpresa').DataTable().ajax.reload();
-                    // Swal.fire(
-                    //     'Se ha eliminado',
-                    //     'de manera satisfactoria',
-                    //     'success'
-                    //   )
+                    $('#consultarEdificio').DataTable().ajax.reload();
+                    if (comp == 1) {
+                        Swal.fire(
+                            'Se ha eliminado',
+                            'de manera satisfactoria',
+                            'success'
+                          );
+                    } else {
+                        Swal.fire(
+                            'No se pudo eliminar',
+                            'Tiene apartamentos asignados, elimine primero',
+                            'warning'
+                          );
+                    }
                 }
             })
             .fail( function(){
-                console.log("fallo el ajax en el ID eliminar");
+                Swal.fire(
+                    'No se pudo eliminar',
+                    'Hubo problemas para atender su solicitud',
+                    'error'
+                );
             })
         }
       })        

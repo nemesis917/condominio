@@ -69,7 +69,7 @@ Consultar empresa
   <div class="modal-dialog" role="document">
     <div class="modal-content bg-secondary">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nombre de la empresa</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modificar nombre de la empresa</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -83,7 +83,7 @@ Consultar empresa
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar ventana</button>
-          <input type="submit" value="Cambiar" class="btn btn-warning">
+          <input type="submit" id="modificarForm" value="Modificar" class="btn btn-warning">
         </form>
       </div>
     </div>
@@ -109,7 +109,7 @@ Consultar empresa
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <input type="submit" value="Guardar" class="btn btn-primary">
+            <input type="submit" id="guardar" value="Guardar" class="btn btn-primary">
           </div>
         </div>
       </div>

@@ -156,7 +156,7 @@ Consultar datos del edificio
           <div class="modal-body">
             <div class="form-group">
               <label for="empresa">Seleccione la empresa</label>
-              <select name="empresa" id="empresa-mod" class="form-control">
+              <select name="modificarEmpresa" id="empresa-mod" class="form-control">
                 <div id="list"></div>
               </select>
               <label for="empresa">Codigo del edificio</label>

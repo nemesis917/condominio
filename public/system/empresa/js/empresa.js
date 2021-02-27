@@ -78,5 +78,12 @@ $(document).on('click','#borrarConsulta', function(){
         }
       })    
 
+
+      $('form').submit(function(){
+        $('#modificarForm').attr('value', "Modificando...");
+        $('#guardar').attr('value', "Guardando...");
+        $(this).find(':submit').attr('disabled','disabled');
+    });
+    
     
 });
