@@ -16,9 +16,10 @@ class edificioController extends Controller
      */
     public function index()
     {
-        $emp = Empresa::select('id', 'empresa')->get();
-        
-        return view('system.edificio.consultarEdificio')->with('empresa', $emp);
+        $emp = Empresa::select('id', 'empresa')->limit(5)->get();
+        $edif = Edificio::select()->limit(5)->get();
+
+        return view('system.edificio.consultarEdificio')->with('empresa', $emp)->with('edificio', $edif);
     }
 
     /**

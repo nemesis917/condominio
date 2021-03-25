@@ -1,3 +1,5 @@
 -- Alterar la tabla edificio / codigo_edificio para que permita zeros delante de los numeros
 ALTER TABLE books CHANGE reference reference INT(2) UNSIGNED ZEROFILL NOT NULL
 
+--linea para la consulta de datatable del campo vivienda
+CREATE OR REPLACE VIEW vw_listaViviendas AS select id, num_inmueble, concat(' ', nombre, apellido ) as `nombre_propietario`, edificio_id from `apartamento` order by `id` DESC;

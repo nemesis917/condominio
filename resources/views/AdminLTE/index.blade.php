@@ -161,7 +161,7 @@
           
         </div>
         <div class="info">
-          <a href="#" class="d-block">alexander impagniatello</a>
+          <a href="#" class="d-block">{{  \Auth::user()->name }} {{  \Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -171,29 +171,35 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <a href="" class="nav-link active">
+              <i class="nav-icon fas fa-home"></i>
               <p>
-                Edificios
+                Viviendas
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('empresa.index') }}" class="nav-link active">
+                <a href="{{ route('empresa.index') }}" class="nav-link {{ ! Route::is('empresa.index') ?: 'active' }}">
                   <i class="far fa-circle nav-icon"></i>
+                  <p>Datos de viviendas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('empresa.consultar') }}" class="nav-link {{ ! Route::is('empresa.consultar') ?: 'active' }}">
+                  <i class="far fa-circle nav-icon text-primary"></i>
                   <p>Cargar empresa</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('edificio.index') }}" class="nav-link {{ ! Route::is('edificio.index') ?: 'active' }}">
+                  <i class="far fa-circle nav-icon text-success"></i>
                   <p>Cargar edificios</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('vivienda.index') }}" class="nav-link {{ ! Route::is('vivienda.index') ?: 'active' }}">
+                  <i class="far fa-circle nav-icon text-warning"></i>
                   <p>cargar apartamentos</p>
                 </a>
               </li>

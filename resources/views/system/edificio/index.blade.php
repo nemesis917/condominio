@@ -19,7 +19,7 @@ Bienvenido al sistema
             <a href="{{ route('empresa.consultar') }}">
                 <div class="small-box bg-info">
                     <div class="inner">
-                      <h3>Consultar las<br>empresas</h3>
+                      <h3>Consultar<br>empresas</h3>
       
                       <p>Empresas existentes: </p>
                     </div>
@@ -33,7 +33,7 @@ Bienvenido al sistema
         <a href="{{ route('edificio.index') }}">
           <div class="small-box bg-success">
             <div class="inner">
-                <h3>Datos de <br>edificios</h3>
+                <h3>Consultar<br>edificios</h3>
 
               <p>Edificios cargados: </p>
             </div>
@@ -44,7 +44,7 @@ Bienvenido al sistema
         </a>
         </div>
         <div class="col-md-4">
-            
+          <a href="{{ route('vivienda.index') }}">
             <div class="small-box bg-warning">
                 <div class="inner">
                   <h3>Consultar<br>Viviendas</h3>
@@ -55,14 +55,14 @@ Bienvenido al sistema
                     <i class="fas fa-house-user"></i>
                 </div>
             </div>
-
+          </a>
         </div>
     </div>
     <div class="row base">
         <div class="col-md 6">
             <div class="card">
                 <div class="card-header border-transparent">
-                  <h3 class="card-title">Empresas registradas</h3>
+                  <h3 class="card-title"><strong>Empresas registradas</strong></h3>
   
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -101,7 +101,7 @@ Bienvenido al sistema
         <div class="col-md 6">
             <div class="card">
                 <div class="card-header border-transparent">
-                  <h3 class="card-title">Edificios</h3>
+                  <h3 class="card-title"><strong>Edificios</strong></h3>
   
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -119,9 +119,11 @@ Bienvenido al sistema
                       </tr>
                       </thead>
                       <tbody>
+                        @foreach ($edificio as $edif)
                         <tr>
-                            <td>Nombre del edificio</td>
+                          <td>{{ $edif->nombre_edificio }}</td>
                         </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Empresa;
+use App\Models\Edificio;
 use DataTables;
 use UxWeb\SweetAlert\SweetAlert;
 
@@ -17,7 +18,8 @@ class empresaController extends Controller
     public function index()
     {
         $data = Empresa::select('empresa')->limit(5)->orderBy('id', 'desc')->get();
-        return view('system.edificio.index')->with('empresa', $data);
+        $edif = Edificio::select('id','nombre_edificio')->limit(5)->orderBy('id', 'desc')->get();
+        return view('system.edificio.index')->with('empresa', $data)->with('edificio', $edif);
     }
 
     /**
