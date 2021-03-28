@@ -20,10 +20,10 @@ class Propietario extends Migration
             $table->string('nombre', 30);
             $table->string('apellido', 30);
             $table->string('estado_inmueble',3);
-            $table->bigInteger('alicuota');
-            $table->float('gastos_administracion', 11, 2);
-            $table->integer('telefono_oficina')->nullable();
-            $table->integer('telefono_habitacion');
+            $table->float('alicuota', 14, 8);
+            $table->float('gastos_administracion', 14, 2);
+            $table->string('telefono_oficina', 12)->nullable();
+            $table->string('telefono_habitacion', 12);
             $table->bigInteger('edificio_id')->unsigned();
 
             $table->foreign('edificio_id')->references('id')->on('edificio');

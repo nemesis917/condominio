@@ -84,6 +84,8 @@ Consultar datos del edificio
               <input type="text"class="form-control" name="honorarios" id="honorarios" maxlength="13" placeholder="Ingrese sus honorarios a cobrar por edificio" required>
               <label for="empresa">Indique la ubicación</label>
               <input type="text"class="form-control" name="ubicacion" id="ubicacion" maxlength="30" placeholder="Ingrese la ubicación del conjunto residencial" required>
+              <label for="empresa">Indique la cantidada de viviendas</label>
+              <input type="text"class="form-control" name="cantidadApartamentos" id="cantidadApartamentos" maxlength="3" placeholder="Cantidad de apartamentos" required>
               <label for="empresa">Dirección</label>
               <input type="text"class="form-control" name="direccion" id="direccion" maxlength="200" placeholder="Ingrese la direccion fiscal del edificio" required>
               <label for="empresa">Código postal</label>
@@ -97,7 +99,7 @@ Consultar datos del edificio
               <label for="empresa">Porcentaje comición cheque devuelto</label>
               <input type="text"class="form-control" name="cheque" id="cheque" maxlength="6" placeholder="Ingrese el porcentaje por comición de cheque devuelto" required>
               <label for="empresa">Comentario</label>
-              <input type="text"class="form-control" name="comentario" id="comentario" maxlength="200" placeholder="Opcionalmente puede escribir un comentario" required>
+              <input type="text"class="form-control" name="comentario" id="comentario" maxlength="200" placeholder="Opcionalmente puede escribir un comentario">
             </div>
           </div>
           <div class="modal-footer">
@@ -169,6 +171,8 @@ Consultar datos del edificio
               <input type="text"class="form-control" name="honorarios" id="honorarios-mod" maxlength="14" placeholder="Ingrese sus honorarios a cobrar por edificio" required>
               <label for="empresa">Indique la ubicación</label>
               <input type="text"class="form-control" name="ubicacion" id="ubicacion-mod" maxlength="30" placeholder="Ingrese la ubicación del conjunto residencial" required>
+              <label for="empresa">Indique la cantidada de viviendas</label>
+              <input type="text"class="form-control" name="cantidadApartamentos" id="cantidadApartamentos-mod" maxlength="3" placeholder="Cantidad de apartamentos" required>
               <label for="empresa">Dirección</label>
               <input type="text"class="form-control" name="direccion" id="direccion-mod" maxlength="200" placeholder="Ingrese la direccion fiscal del edificio" required>
               <label for="empresa">Código postal</label>
@@ -182,7 +186,7 @@ Consultar datos del edificio
               <label for="empresa">Porcentaje comición cheque devuelto</label>
               <input type="text"class="form-control" name="cheque" id="cheque-mod" maxlength="6" placeholder="Ingrese el porcentaje por comición de cheque devuelto" required>
               <label for="empresa">Comentario</label>
-              <input type="text"class="form-control" name="comentario" id="comentario-mod" maxlength="200" placeholder="Opcionalmente puede escribir un comentario" required>
+              <input type="text"class="form-control" name="comentario" id="comentario-mod" maxlength="200" placeholder="Opcionalmente puede escribir un comentario">
               <input type="hidden" id="dataTips" name="data" value="">
             </div>
           </div>

@@ -56,8 +56,10 @@ Route::group(['prefix' => 'sistema/viviendas','middleware' => ['auth']], functio
     Route::get('/ajax/consulta/', [viviendaController::class, "consultarVivienda"]);
     Route::get('/ajax/verEmpresa/{id}', [viviendaController::class, "jq_seleccionarEmpresa"]);
     Route::get('/ajax/consultas/{id}', [viviendaController::class, "jq_consultarVivienda"]);
+    Route::get('/ajax/guardar-apartamento/', [viviendaController::class, "jq_guardarViviendas"]);
+    Route::get('/ajax/porcentaje-alicuota/{id}', [viviendaController::class, "jq_porc_alicuota"]);
 
     //Route::get()->name();
-
+    
 
 });

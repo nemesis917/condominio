@@ -20,13 +20,14 @@ class Edificio extends Migration
             $table->integer('codigo_gerente');
             $table->float('honorarios_edif', 13, 2);
             $table->string('ubicacion', 30);
+            $table->string('cant_apart', 3);
             $table->string('direccion',250);
             $table->integer('codigo_postal');
             $table->float('porc_fondo_reserva',5, 2);
             $table->float('iva', 5, 2);
             $table->float('porc_intereces_mor',5, 2);
             $table->float('porc_comision_cheque_devuelto',5, 2);
-            $table->string('comentario', 250);
+            $table->string('comentario', 250)->nullable();
             $table->timestamps();
         });
     }

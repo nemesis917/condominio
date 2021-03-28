@@ -36,13 +36,14 @@ class edificioController extends Controller
             'codigoG' => 'required|max:3',
             'honorarios' => 'required|max:13|between:0,9999999999.99',
             'ubicacion' => 'required|max:30',
+            'cantidadApartamentos' => 'required|max:3',
             'direccion' => 'required|max:200',
             'postal' => 'required|max:4',
             'reserva' => 'required|max:6|between:0,100.00',
             'morosos' => 'required|max:6|between:0,100.00',
             'iva' => 'required|max:6|between:0,100.00',
             'cheque' => 'required|max:6|between:0,100.00',
-            'comentario' => 'required|max:200'            
+            'comentario' => 'max:200'            
         ]);
 
         $edif = new Edificio;
@@ -54,6 +55,7 @@ class edificioController extends Controller
 
         $edif->honorarios_edif = $honor;
         $edif->ubicacion = $request->ubicacion;
+        $edif->cant_apart = $request->cantidadApartamentos;
         $edif->direccion = $request->direccion;
         $edif->codigo_postal = $request->postal;
         $edif->porc_fondo_reserva = $request->reserva;
@@ -114,6 +116,7 @@ class edificioController extends Controller
             'codigoG' => 'required|max:3',
             'honorarios' => 'required|max:13|between:0,9999999999.99',
             'ubicacion' => 'required|max:30',
+            'cantidadApartamentos' => 'required|max:3',
             'direccion' => 'required|max:200',
             'postal' => 'required|max:4',
             'reserva' => 'required|max:6|between:0,100',
@@ -130,6 +133,7 @@ class edificioController extends Controller
         $edif->codigo_gerente = $request->codigoG;
         $edif->honorarios_edif = $request->honorarios;
         $edif->ubicacion = $request->ubicacion;
+        $edif->cant_apart = $request->cantidadApartamentos;
         $edif->direccion = $request->direccion;
         $edif->codigo_postal = $request->postal;
         $edif->porc_fondo_reserva = $request->reserva;
