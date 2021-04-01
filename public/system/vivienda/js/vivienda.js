@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('#cargarEmpresa').val("");
+    $('#cargarNumeroInmueble').focus();
     limpiar();
 
     function limpiarAlicuotas()
@@ -18,6 +19,10 @@ $(document).ready(function(){
     $('#cargarGastos').numeric({decimalPlaces: 2,  negative: false});
     $('#cargarTlfHabitacion').numeric({negative: false, decimal: false});  
     $('#cargarTlfMovil').numeric({negative: false, decimal: false});  
+    $('#cargarAlicuotaMod').numeric({decimalPlaces: 8,  negative: false});
+    $('#cargarGastosMod').numeric({decimalPlaces: 2,  negative: false});
+    $('#cargarTlfHabitacionMod').numeric({negative: false, decimal: false});  
+    $('#cargarTlfMovilMod').numeric({negative: false, decimal: false});  
 
     function limpiar(){
         $('#cargarNumeroInmueble').val("");
@@ -191,6 +196,7 @@ $(document).ready(function(){
             if (comp === true) {
                 $('#consultarVivienda').DataTable().ajax.reload();
                 porcentajeAlicuota( $('#cargarEdificio').val() );
+                $('#cargarNumeroInmueble').focus();
                 limpiar();
             } else {
                 alert("Hubo un error, no pudo cargar el formulario");
@@ -236,6 +242,74 @@ $(document).ready(function(){
             console.log("fallo el ajax en modificar la vivienda");
             
         });
+    });
+
+    $(document).on('click', '#borrarVivienda', function(){
+        let e = this.value;
+        
+        Swal.fire({
+            title: '¿Esta usted seguro',
+            text: "de querer eliminar esta empresa?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminar!',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.value) {
+
+            $.ajax({
+                url: 'viviendas/ajax/eliminar/2464568778',
+                type: 'POST',
+                dataType: 'json',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {id: e}
+            })
+            .done(function(comp) {
+                $('#consultarVivienda').DataTable().ajax.reload();
+                if (comp === true) {
+                    Swal.fire(
+                        'Se a eliminado',
+                        'los datos asociados a esta vivienda',
+                        'success'
+                    );
+                } else {
+                    Swal.fire(
+                        'No pudo eliminar',
+                        'de la base de datos',
+                        'error'
+                    );
+                }
+            })
+            .fail( function(){
+                Swal.fire(
+                    'No se pudo eliminar',
+                    'Ya cuenta con información asociada',
+                    'error'
+                );
+            })
+            }
+          })    
+
+    });
+
+    $('#cargarFormularioMod').on('click', function(){
+        if(
+            $('#cargarEmpresaMod').val() == "" || $('#cargarEdificioMod').val() == "" || 
+            $('#cargarNumeroInmuebleMod').val() == "" || $('#cargarEstadoInmuebleMod').val() == "" || 
+            $('#cargarNombrePropietarioMod').val() == "" || $('#cargarApellidoPropietarioMod').val() == "" || 
+            $('#cargarAlicuotaMod').val() == "" || $('#cargarGastosMod').val() == "" || 
+            $('#cargarTlfHabitacionMod').val() == "" || $('#cargarTlfMovilMod').val() == "" || 
+            $('#cargarCorreoMod').val() == ""
+          ){
+            Swal.fire(
+                'Un campo se encuentra vacio!',
+                'Por favor valida que no queden campos vacios',
+                'error'
+            );
+            return false; 
+        }
     });
 
 

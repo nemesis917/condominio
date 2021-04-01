@@ -115,7 +115,7 @@ Consultar las viviendas
         
                       <div class="info-box-content">
                         <span class="info-box-text">CANTIDAD DE VIVIENDAS</span>
-                        <h2><span class="info-box-number" style="padding-top: 2px;"><div id="cantViv">0</div></span></h2>
+                        <h2><span class="info-box-number" style="padding-top: 2px;"><div id="cantViv">0 viviendas</div></span></h2>
         
  
 
@@ -155,7 +155,7 @@ Consultar las viviendas
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Modificar datos de vivienda</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -179,53 +179,51 @@ Consultar las viviendas
                     <div class="row" style="margin-top: 8px;">
                         <div class="col-6">
                             <label for="">Numero del inmueble</label>
-                            <input type="text" name="cargarNumeroInmuebleMod" class="form-control" placeholder="Número de vivienda" maxlength="10" id="cargarNumeroInmuebleMod">
+                            <input type="text" name="cargarNumeroInmuebleMod" class="form-control" placeholder="Número de vivienda" maxlength="10" id="cargarNumeroInmuebleMod" required>
                         </div>
                         <div class="col-6">
                             <label for="">Estado del inmueble</label>
-                            <input type="text" name="cargarEstadoInmuebleMod" class="form-control" placeholder="Estado de vivienda" maxlength="3" id="cargarEstadoInmuebleMod">
+                            <input type="text" name="cargarEstadoInmuebleMod" class="form-control" placeholder="Estado de vivienda" maxlength="3" id="cargarEstadoInmuebleMod" required>
                         </div>
                     </div>
                     <label for="">Nombre de propietario</label>
-                    <input type="text" name="cargarNombrePropietarioMod" class="form-control" placeholder="Nombre del titular de la vivienda" maxlength="30" id="cargarNombrePropietarioMod">
+                    <input type="text" name="cargarNombrePropietarioMod" class="form-control" placeholder="Nombre del titular de la vivienda" maxlength="30" id="cargarNombrePropietarioMod" required>
                     <label for="">Apellido de propietario</label>
-                    <input type="text" name="cargarApellidoPropietarioMod" class="form-control" placeholder="Apellido del titular de la vivienda" maxlength="30" id="cargarApellidoPropietarioMod">
+                    <input type="text" name="cargarApellidoPropietarioMod" class="form-control" placeholder="Apellido del titular de la vivienda" maxlength="30" id="cargarApellidoPropietarioMod" required>
                     <label for="">Alicuota</label>
-                    <input type="text" name="cargarAlicuotaMod" class="form-control" placeholder="Indique el porcentaje" maxlength="14" id="cargarAlicuotaMod">
+                    <input type="text" name="cargarAlicuotaMod" class="form-control" placeholder="Indique el porcentaje" maxlength="14" id="cargarAlicuotaMod" required>
                     <label for="">Gastos administración</label>
-                    <input type="text" name="cargarGastosMod" class="form-control" placeholder="Indique sus onorarios profesionales" maxlength="12" id="cargarGastosMod">
+                    <input type="text" name="cargarGastosMod" class="form-control" placeholder="Indique sus onorarios profesionales" maxlength="12" id="cargarGastosMod" required>
                     <div class="row" style="margin-top: 8px;">
                         <div class="col-md-6">
-                            <label for="">Teléfono habitación</label>
-                            {{-- <input type="text" name="cargarTlfLocal" class="form-control" maxlength="12" id="cargarTlfHabitacion"> --}}
-                            
+                            <label for="">Teléfono habitación</label>                            
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                 </div>
-                                <input type="text" name="cargarTlfLocalMod" class="form-control" placeholder="Número local" maxlength="11" id="cargarTlfHabitacionMod">
+                                <input type="text" name="cargarTlfLocalMod" class="form-control" placeholder="Número local" maxlength="11" id="cargarTlfHabitacionMod" required>
                             </div>
             
             
                         </div>
                         <div class="col-md-6">
                             <label for="">Teléfono celular</label>
-                            {{-- <input type="text" name="cargarTlfMovil" class="form-control" maxlength="12" id="cargarTlfMovil"> --}}
+                          
                         
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="fas fa-microphone"></i></span>
                                 </div>
-                                <input type="text" name="cargarTlfMovilMod" class="form-control" placeholder="Número móvil" maxlength="11" id="cargarTlfMovilMod">
-                                <input type="hidden" name="idMax" id="hiddena">
-                                <input type="hidden" name="idEmp" id="hiddenb">
-                                <input type="hidden" name="idEdf" id="hiddenc">
+                                <input type="text" name="cargarTlfMovilMod" class="form-control" placeholder="Número móvil" maxlength="11" id="cargarTlfMovilMod" required>
+                                <input type="hidden" name="idMax" id="hiddena" required>
+                                <input type="hidden" name="idEmp" id="hiddenb" required>
+                                <input type="hidden" name="idEdf" id="hiddenc" required>
                             </div>
                         
                         </div>
                     </div>
                     <label for="">Correo electrónico</label>
-                    <input type="text" name="cargarCorreoMod" class="form-control" placeholder="ejemplo@ejemplo.com" maxlength="60" id="cargarCorreoMod">
+                    <input type="email" name="cargarCorreoMod" class="form-control" placeholder="ejemplo@ejemplo.com" maxlength="60" id="cargarCorreoMod">
 
                 </div>
 
@@ -244,7 +242,25 @@ Consultar las viviendas
     </div>
   </div>
 
-
+@if (session('mensaje'))
+    @if (session('mensaje') == 1)
+        <script>
+                Swal.fire(
+                'Solicitud procesada!',
+                'Se ha atendido su solicitud satisfactoriamente',
+                'success'
+                )
+        </script>
+    @else
+        <script>
+                Swal.fire(
+                    'Hubo un error',
+                    'La información no fue salvada',
+                    'error'
+                )
+        </script>
+    @endif
+@endif
 
 
 

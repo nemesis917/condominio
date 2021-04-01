@@ -53,7 +53,9 @@ class viviendaController extends Controller
             $id_empresa = $request->empresaMod;
 
             $edificio->empresa()->updateExistingPivot($request->cargarEdificioMod, ['empresa_id' => $id_empresa ]);
-
+            return redirect()->route('vivienda.index')->with('mensaje', "1");
+        } else {
+            return redirect()->route('vivienda.index')->with('mensaje', "2"); 
         }
 
 
@@ -150,7 +152,14 @@ class viviendaController extends Controller
 
     }
 
+    public function jq_eliminarVivienda(Request $request)
+    {
+        $eliminar = Vivienda::find($request->id);
+        $salvar = $eliminar->delete();
 
+        return response()->json($salvar);
+
+    }
 
 
 

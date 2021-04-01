@@ -65,7 +65,7 @@ Route::group(['prefix' => 'sistema/viviendas','middleware' => ['auth']], functio
     Route::get('/ajax/porcentaje-alicuota/{id}{id2}', [viviendaController::class, "jq_porc_alicuota"]);
     Route::get('/ajax/modificar/{id}d34h765{id2}', [viviendaController::class, "jq_modificarVivienda"]);
     Route::post('/modificar/d34h765', [viviendaController::class, "actualizarVivienda"])->name('vivienda.update');
-
+    Route::post('/ajax/eliminar/2464568778', [viviendaController::class, "jq_eliminarVivienda"]);
     //Route::get()->name();
     
 
