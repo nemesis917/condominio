@@ -21,6 +21,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('web/index');
 // });
+
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+
 Route::get('/', [webController::class, "index"])->name('web.index');
 Route::get('/nosotros', [webController::class, "nosotros"])->name('web.nosotros');
 Route::get('/servicios', [webController::class, "servicios"])->name('web.servicios');
@@ -57,7 +62,9 @@ Route::group(['prefix' => 'sistema/viviendas','middleware' => ['auth']], functio
     Route::get('/ajax/verEmpresa/{id}', [viviendaController::class, "jq_seleccionarEmpresa"]);
     Route::get('/ajax/consultas/{id}', [viviendaController::class, "jq_consultarVivienda"]);
     Route::get('/ajax/guardar-apartamento/', [viviendaController::class, "jq_guardarViviendas"]);
-    Route::get('/ajax/porcentaje-alicuota/{id}', [viviendaController::class, "jq_porc_alicuota"]);
+    Route::get('/ajax/porcentaje-alicuota/{id}{id2}', [viviendaController::class, "jq_porc_alicuota"]);
+    Route::get('/ajax/modificar/{id}d34h765{id2}', [viviendaController::class, "jq_modificarVivienda"]);
+    Route::post('/modificar/d34h765', [viviendaController::class, "actualizarVivienda"])->name('vivienda.update');
 
     //Route::get()->name();
     

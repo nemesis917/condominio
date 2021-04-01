@@ -170,8 +170,16 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="" class="nav-link active">
+          <li class="nav-item has-treeview">
+            <a href="{{ route('dashboard') }}" class="nav-link">
+              <i class="nav-icon fas fa-h-square"></i>
+              <p>
+                Dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item has-treeview {{ ! Route::is('empresa.index') ?: 'menu-open' }} {{ ! Route::is('empresa.consultar') ?: 'menu-open' }} {{ ! Route::is('edificio.index') ?: 'menu-open' }} {{ ! Route::is('vivienda.index') ?: 'menu-open' }}">
+            <a href="" class="nav-link {{ ! Route::is('empresa.index') ?: 'active' }} {{ ! Route::is('empresa.consultar') ?: 'active' }} {{ ! Route::is('edificio.index') ?: 'active' }} {{ ! Route::is('vivienda.index') ?: 'active' }}">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Viviendas
@@ -182,41 +190,63 @@
               <li class="nav-item">
                 <a href="{{ route('empresa.index') }}" class="nav-link {{ ! Route::is('empresa.index') ?: 'active' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Datos de viviendas</p>
+                  <p>Inicio viviendas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('empresa.consultar') }}" class="nav-link {{ ! Route::is('empresa.consultar') ?: 'active' }}">
-                  <i class="far fa-circle nav-icon text-primary"></i>
+                  <i class="fas fa-briefcase nav-icon text-primary"></i>
                   <p>Cargar empresa</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('edificio.index') }}" class="nav-link {{ ! Route::is('edificio.index') ?: 'active' }}">
-                  <i class="far fa-circle nav-icon text-success"></i>
+                  <i class="far fa-building nav-icon text-success"></i>
                   <p>Cargar edificios</p>
                 </a>
               </li>
+
               <li class="nav-item">
                 <a href="{{ route('vivienda.index') }}" class="nav-link {{ ! Route::is('vivienda.index') ?: 'active' }}">
-                  <i class="far fa-circle nav-icon text-warning"></i>
+                  <i class="fas fa-laptop-house nav-icon text-warning"></i>
                   <p>cargar apartamentos</p>
                 </a>
               </li>
-              {{-- <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="" class="nav-link">
+              <i class="nav-icon fas fa-h-square"></i>
+              <p>
+                Menu desplegable
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="#" class="nav-link {{ ! Route::is('empresa.index') ?: 'active' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
+                  <p>Datos 1</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
+                <a href="#" class="nav-link {{ ! Route::is('empresa.consultar') ?: 'active' }}">
+                  <i class="far fa-circle nav-icon text-primary"></i>
+                  <p>Cargar 2</p>
                 </a>
-              </li> --}}
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link {{ ! Route::is('edificio.index') ?: 'active' }}">
+                  <i class="far fa-circle nav-icon text-success"></i>
+                  <p>Cargar 3</p>
+                </a>
+              </li>
+
             </ul>
           </li>
+
+
           {{-- <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -434,7 +464,7 @@
           </li> --}}
           <li class="nav-header">Ajustes</li>
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="#" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 Configuración
@@ -442,6 +472,35 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Usuarios
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Asignaciones
+              </p>
+            </a>
+          </li>
+          {{-- cerrar sesion inicio --}}
+          <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              <i class="far fa-arrow-alt-circle-left nav-icon" style="color: #e61010"></i>
+              <p style="color: #e61010">
+                Cerrar sesión
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+                </form>
+              </p>
+            </a>
+          </li>
+          {{-- cerrar sesion fin --}}
           {{-- <li class="nav-item">
             <a href="pages/gallery.html" class="nav-link">
               <i class="nav-icon far fa-image"></i>

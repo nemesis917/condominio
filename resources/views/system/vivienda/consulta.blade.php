@@ -57,7 +57,7 @@ Consultar las viviendas
                                 <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                 </div>
-                                <input type="text" name="cargarTlfLocal" class="form-control" placeholder="Número local" maxlength="12" id="cargarTlfHabitacion">
+                                <input type="text" name="cargarTlfLocal" class="form-control" placeholder="Número local" maxlength="11" id="cargarTlfHabitacion">
                             </div>
 
 
@@ -70,7 +70,7 @@ Consultar las viviendas
                                 <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="fas fa-microphone"></i></span>
                                 </div>
-                                <input type="text" name="cargarTlfMovil" class="form-control" placeholder="Número móvil" maxlength="12" id="cargarTlfMovil">
+                                <input type="text" name="cargarTlfMovil" class="form-control" placeholder="Número móvil" maxlength="11" id="cargarTlfMovil">
                             </div>
                         
                         </div>
@@ -149,6 +149,110 @@ Consultar las viviendas
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="modificarVivienda" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <form action="{{ route('vivienda.update') }}" method="post">
+                @csrf
+                <div class="form-group">
+                    <label for="">Seleccione una empresa</label>
+                    <select name="empresaMod" id="cargarEmpresaMod" class="form-control" required>
+                        <option value="">Seleccione...</option>
+                        @foreach ($empresa as $item)
+                            <option value="{{ $item->id }}">{{ $item->empresa }}</option>
+                        @endforeach
+                    </select>
+                    <label for="">Seleccione un edificio</label>
+                    <select name="cargarEdificioMod" id="cargarEdificioMod" class="form-control"  required>
+                        <option value="">Seleccione...</option>
+                    </select>
+                    <div class="row" style="margin-top: 8px;">
+                        <div class="col-6">
+                            <label for="">Numero del inmueble</label>
+                            <input type="text" name="cargarNumeroInmuebleMod" class="form-control" placeholder="Número de vivienda" maxlength="10" id="cargarNumeroInmuebleMod">
+                        </div>
+                        <div class="col-6">
+                            <label for="">Estado del inmueble</label>
+                            <input type="text" name="cargarEstadoInmuebleMod" class="form-control" placeholder="Estado de vivienda" maxlength="3" id="cargarEstadoInmuebleMod">
+                        </div>
+                    </div>
+                    <label for="">Nombre de propietario</label>
+                    <input type="text" name="cargarNombrePropietarioMod" class="form-control" placeholder="Nombre del titular de la vivienda" maxlength="30" id="cargarNombrePropietarioMod">
+                    <label for="">Apellido de propietario</label>
+                    <input type="text" name="cargarApellidoPropietarioMod" class="form-control" placeholder="Apellido del titular de la vivienda" maxlength="30" id="cargarApellidoPropietarioMod">
+                    <label for="">Alicuota</label>
+                    <input type="text" name="cargarAlicuotaMod" class="form-control" placeholder="Indique el porcentaje" maxlength="14" id="cargarAlicuotaMod">
+                    <label for="">Gastos administración</label>
+                    <input type="text" name="cargarGastosMod" class="form-control" placeholder="Indique sus onorarios profesionales" maxlength="12" id="cargarGastosMod">
+                    <div class="row" style="margin-top: 8px;">
+                        <div class="col-md-6">
+                            <label for="">Teléfono habitación</label>
+                            {{-- <input type="text" name="cargarTlfLocal" class="form-control" maxlength="12" id="cargarTlfHabitacion"> --}}
+                            
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                </div>
+                                <input type="text" name="cargarTlfLocalMod" class="form-control" placeholder="Número local" maxlength="11" id="cargarTlfHabitacionMod">
+                            </div>
+            
+            
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">Teléfono celular</label>
+                            {{-- <input type="text" name="cargarTlfMovil" class="form-control" maxlength="12" id="cargarTlfMovil"> --}}
+                        
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"><i class="fas fa-microphone"></i></span>
+                                </div>
+                                <input type="text" name="cargarTlfMovilMod" class="form-control" placeholder="Número móvil" maxlength="11" id="cargarTlfMovilMod">
+                                <input type="hidden" name="idMax" id="hiddena">
+                                <input type="hidden" name="idEmp" id="hiddenb">
+                                <input type="hidden" name="idEdf" id="hiddenc">
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <label for="">Correo electrónico</label>
+                    <input type="text" name="cargarCorreoMod" class="form-control" placeholder="ejemplo@ejemplo.com" maxlength="60" id="cargarCorreoMod">
+
+                </div>
+
+        </div>
+            <div class="modal-footer">
+                {{-- <button type="button" class="btn btn-secondary btn-lg btn-block" data-dismiss="modal">Close</button> --}}
+                <button type="button" data-dismiss="modal" class="btn btn-secondary  btn-lg "  style="margin-top:8px; margin-button:8px;">Cerrar</button>
+                <input type="submit" class="btn btn-warning  btn-lg " maxlength="" id="cargarFormularioMod" style="margin-top:8px; margin-button:8px;" value="Modificar">
+            </div>
+
+            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button> --}}
+            </div>
+        </form>
+    </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
 @endsection
 @section('javascript')
 <script src="{{ asset('system/vivienda/js/vivienda.js') }}"></script>

@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('Whoops!')
 @else
-# @lang('Hello!')
+# @lang('Hola!')
 @endif
 @endif
 
@@ -43,16 +43,16 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Regards'),<br>
+@lang('Un saludo.'),<br>
 {{ config('app.name') }}
 @endif
 
-{{-- Subcopy --}}
+{{-- Subcopy  sistema de condominio correo --}}
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
+    "Si tiene problemas para hacer clic en el boton \":actionText\", \n".
+    'copie y pegue la URL a continuación:',
     [
         'actionText' => $actionText,
     ]

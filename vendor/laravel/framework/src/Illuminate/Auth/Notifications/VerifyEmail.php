@@ -61,11 +61,12 @@ class VerifyEmail extends Notification
      */
     protected function buildMailMessage($url)
     {
+        // {{-- sistema de condominio correo --}}
         return (new MailMessage)
-            ->subject(Lang::get('Verify Email Address'))
-            ->line(Lang::get('Please click the button below to verify your email address.'))
-            ->action(Lang::get('Verify Email Address'), $url)
-            ->line(Lang::get('If you did not create an account, no further action is required.'));
+            ->subject(Lang::get('Correo de verificación para sistema de condominio'))
+            ->line(Lang::get('Haga clic en el botón de abajo para verificar su dirección de correo electrónico.'))
+            ->action(Lang::get('Verifique su dirección de correo'), $url)
+            ->line(Lang::get('Si usted no creó una cuenta, por favor haga caso omiso de este mensaje.'));
     }
 
     /**

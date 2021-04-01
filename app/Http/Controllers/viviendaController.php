@@ -27,6 +27,40 @@ class viviendaController extends Controller
                 ->make(true);
     }
 
+    public function actualizarVivienda(Request $request)
+    {
+        $vivienda = Vivienda::find($request->idMax);
+        $edificio = Edificio::find( $request-> cargarEdificioMod );
+
+        $empresa_id = $request->idEmp;
+        $edificio_id = $request->idEdf;
+
+        $vivienda->correo = $request->cargarCorreoMod;
+        $vivienda->num_inmueble = $request->cargarNumeroInmuebleMod;
+        $vivienda->nombre = $request->cargarNombrePropietarioMod;
+        $vivienda->apellido = $request->cargarApellidoPropietarioMod;
+        $vivienda->estado_inmueble = $request->cargarEstadoInmuebleMod;
+        $vivienda->alicuota = $request->cargarAlicuotaMod;
+        $vivienda->gastos_administracion = $request->cargarGastosMod;
+        $vivienda->telefono_oficina = $request->cargarTlfMovilMod;
+        $vivienda->telefono_habitacion = $request->cargarTlfLocalMod;
+        $vivienda->edificio_id = $request-> cargarEdificioMod;
+
+        $vivienda->updated_at = now();
+        $res = $vivienda->update();
+
+        if ($res) {
+            $id_empresa = $request->empresaMod;
+
+            $edificio->empresa()->updateExistingPivot($request->cargarEdificioMod, ['empresa_id' => $id_empresa ]);
+
+        }
+
+
+
+    }
+
+
 //  ---------- Jquery -------------
 
     public function jq_seleccionarEmpresa($id)
@@ -55,7 +89,7 @@ class viviendaController extends Controller
 
         return Datatables::of($query)
                 ->addIndexColumn()
-                ->addColumn('btn', 'system.empresa.btn.btnConsultar')
+                ->addColumn('btn', 'system.vivienda.btn.btnConsultar')
                 ->rawColumns(['btn'])
                 ->make(true);
     }
@@ -95,12 +129,29 @@ class viviendaController extends Controller
 
     }
 
-    public function jq_porc_alicuota($id)
+    public function jq_porc_alicuota($empresa,$edificio)
     {
-        $cantidadAparatamento = Edificio::select('cant_apart')->get();
-        $suma = Vivienda::select('alicuota')->where('edificio_id', $id)->sum('alicuota');
-        
+        $suma = Vivienda::select('id','alicuota')->where('edificio_id', $empresa)->sum('alicuota');
+
+        $cantidadAparatamento = Edificio::select('edificio.cant_apart AS cant_apart')
+        ->join('edificio_empresa', 'edificio_empresa.edificio_id', 'edificio.id')
+        ->where('edificio.id', $edificio)
+        ->get();
+
         return response()->json([$cantidadAparatamento, $suma]);
+
     }
+
+    public function jq_modificarVivienda($vivienda, $cargarEdificio)
+    {
+
+        $mod = Vivienda::select()->where('edificio_id', $cargarEdificio)->where('id', $vivienda)->first();
+        return response()->json($mod);
+
+    }
+
+
+
+
 
 }

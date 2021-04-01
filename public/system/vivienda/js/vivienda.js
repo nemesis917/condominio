@@ -31,10 +31,23 @@ $(document).ready(function(){
         $('#cargarCorreo').val("");
     }
 
+    function limpiarMod(){
+        $('#cargarNumeroInmuebleMod').val("");
+        $('#cargarEstadoInmuebleMod').val("");
+        $('#cargarNombrePropietarioMod').val("");
+        $('#cargarApellidoPropietarioMod').val("");
+        $('#cargarAlicuotaMod').val("");
+        $('#cargarGastosMod').val("");
+        $('#cargarTlfHabitacionMod').val("");
+        $('#cargarTlfMovilMod').val("");
+        $('#cargarCorreoMod').val("");
+    }
+
     function porcentajeAlicuota(valor)
     {
+        let edif = $('#cargarEdificio').val();
         $.ajax({
-            url: 'viviendas/ajax/porcentaje-alicuota/' + valor,
+            url: 'viviendas/ajax/porcentaje-alicuota/' + valor + edif,
             type: 'get',
             dataType: 'json',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
@@ -77,7 +90,7 @@ $(document).ready(function(){
     }
 
 
-    $('#cargarEmpresa').on('change', function(){
+    $('#cargarEmpresa, #cargarEmpresaMod').on('change', function(){
         let e = $(this).val();
         
         if (e === "") {
@@ -103,6 +116,7 @@ $(document).ready(function(){
                     arreglo.push('<option value="' + comp[index].id + '">' + comp[index].nombre_edificio + '</option>');
                 }
                 $('#cargarEdificio').html(arreglo);
+                $('#cargarEdificioMod').html(arreglo);
             })
             .fail( function(){
                 console.log("fallo el ajax en el el select de empresa");
@@ -128,6 +142,10 @@ $(document).ready(function(){
 
     $('#limpiarFormulario').on('click', function(){
         limpiar();
+    });
+
+    $('#limpiarFormularioMod').on('click', function(){
+        limpiarMod();
     });
 
     $('#cargarFormulario').on('click', function(){
@@ -185,7 +203,40 @@ $(document).ready(function(){
 
     });
 
+    $(document).on('click','#modVivienda', function(){
 
+        let emp = $('#cargarEmpresa').val();
+        let edf = $('#cargarEdificio').val();
+
+        
+
+        $.ajax({
+            type: "GET",
+            url: "viviendas/ajax/modificar/" +  this.value + "d34h765" +$('#cargarEdificio').val(),
+            data: "data",
+            dataType: "json",
+            success: function (response) {
+                console.log( response);
+                $('#cargarEmpresaMod').val( emp );
+                $('#cargarEdificioMod').val( edf );
+                $('#cargarNumeroInmuebleMod').attr("value",response.num_inmueble);
+                $('#cargarEstadoInmuebleMod').attr( "value",response.estado_inmueble );
+                $('#cargarNombrePropietarioMod').attr( "value",response.nombre );
+                $('#cargarApellidoPropietarioMod').attr( "value",response.apellido );
+                $('#cargarAlicuotaMod').attr( "value",response.alicuota );
+                $('#cargarGastosMod').attr( "value",response.gastos_administracion );
+                $('#cargarTlfHabitacionMod').attr( "value",response.telefono_habitacion );
+                $('#cargarTlfMovilMod').attr( "value",response.telefono_oficina );
+                $('#cargarCorreoMod').attr( "value",response.correo );
+                $('#hiddena').attr( "value",response.id );
+                $('#hiddenb').attr( "value", $('#cargarEmpresa').val() );
+                $('#hiddenc').attr( "value", $('#cargarEdificio').val() );
+            }
+        }).fail( function(){
+            console.log("fallo el ajax en modificar la vivienda");
+            
+        });
+    });
 
 
 });
