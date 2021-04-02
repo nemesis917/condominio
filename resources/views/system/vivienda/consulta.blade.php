@@ -4,6 +4,7 @@ Consultar las viviendas
 @endsection
 @section('css')
 <script src="{{ asset('plugins/numeric/jquery.numeric.js') }}"></script>
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 @endsection
 @section('cabIzquierda')
 <h1 class="m-0 text-dark">Cargar datos de viviendas</h1>
@@ -68,7 +69,7 @@ Consultar las viviendas
                         
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                  <span class="input-group-text"><i class="fas fa-microphone"></i></span>
+                                  <span class="input-group-text"><i class="fas fa-phone-square-alt"></i></span>
                                 </div>
                                 <input type="text" name="cargarTlfMovil" class="form-control" placeholder="Número móvil" maxlength="11" id="cargarTlfMovil">
                             </div>

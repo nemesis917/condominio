@@ -5,6 +5,7 @@ use App\Http\Controllers\homeController;
 use App\Http\Controllers\empresaController;
 use App\Http\Controllers\edificioController;
 use App\Http\Controllers\viviendaController;
+use App\Http\Controllers\usuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,6 +68,8 @@ Route::group(['prefix' => 'sistema/viviendas','middleware' => ['auth']], functio
     Route::post('/modificar/d34h765', [viviendaController::class, "actualizarVivienda"])->name('vivienda.update');
     Route::post('/ajax/eliminar/2464568778', [viviendaController::class, "jq_eliminarVivienda"]);
     //Route::get()->name();
-    
+});
 
+Route::group(['prefix' => 'configuracion','middleware' => ['auth']], function () {
+    Route::get('/usuarios/usuario', [usuarioController::class, "index"])->name('conf.usuario.index');
 });

@@ -161,7 +161,7 @@
           
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{  \Auth::user()->name }} {{  \Auth::user()->name }}</a>
+          <a href="#" class="d-block">{{  \Auth::user()->name }} {{  \Auth::user()->lastname }}</a>
         </div>
       </div>
 
@@ -472,21 +472,35 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
+          <li class="nav-item has-treeview">
+            <a href="" class="nav-link">
+              <i class="nav-icon fas fa-user-tie"></i>
               <p>
                 Usuarios
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
-                Asignaciones
-              </p>
-            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('conf.usuario.index') }}" class="nav-link {{ ! Route::is('empresa.index') ?: 'active' }}">
+                  <i class="fas fa-user-check nav-icon"></i>
+                  <p>Datos de usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link {{ ! Route::is('empresa.consultar') ?: 'active' }}">
+                  <i class="far fa-circle nav-icon text-primary"></i>
+                  <p>Cargar 2</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link {{ ! Route::is('edificio.index') ?: 'active' }}">
+                  <i class="far fa-circle nav-icon text-success"></i>
+                  <p>Cargar 3</p>
+                </a>
+              </li>
+
+            </ul>
           </li>
           {{-- cerrar sesion inicio --}}
           <li class="nav-item">
