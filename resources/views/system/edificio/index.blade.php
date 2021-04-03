@@ -30,18 +30,18 @@ Bienvenido al sistema
             </a>
         </div>
         <div class="col-md-4">
-        <a href="{{ route('edificio.index') }}">
-          <div class="small-box bg-success">
-            <div class="inner">
-                <h3>Consultar<br>edificios</h3>
+          <a href="{{ route('edificio.index') }}">
+            <div class="small-box bg-success">
+              <div class="inner">
+                  <h3>Consultar<br>edificios</h3>
 
-              <p>Edificios cargados: </p>
-            </div>
-            <div class="icon">
-                <i class="far fa-building"></i>
-            </div>
-        </div>        
-        </a>
+                <p>Edificios cargados: </p>
+              </div>
+              <div class="icon">
+                  <i class="far fa-building"></i>
+              </div>
+          </div>        
+          </a>
         </div>
         <div class="col-md-4">
           <a href="{{ route('vivienda.index') }}">
