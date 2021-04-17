@@ -42,4 +42,9 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function apartamentos()
+    {
+        return $this->belongsToMany('App\Models\Vivienda')->withTimestamps();
+    }
 }

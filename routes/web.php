@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [webController::class, "index"])->name('web.index');
 Route::get('/nosotros', [webController::class, "nosotros"])->name('web.nosotros');
 Route::get('/servicios', [webController::class, "servicios"])->name('web.servicios');
-
+Route::post('/user-validate', [webController::class, "validarCorreoRegistro"]);
 
 
 require __DIR__.'/auth.php';
@@ -72,4 +72,10 @@ Route::group(['prefix' => 'sistema/viviendas','middleware' => ['auth']], functio
 
 Route::group(['prefix' => 'configuracion','middleware' => ['auth']], function () {
     Route::get('/usuarios/usuario', [usuarioController::class, "index"])->name('conf.usuario.index');
+    Route::post('/usuarios/guardarUnUsuario', [usuarioController::class, "store"])->name('conf.usuario.guardar');
+    Route::get('/usuarios/lista-usuarios',[usuarioController::class, "jq_usuario"]);
+    Route::get('datos-de-usuario/968fg5bbgfs267sg11{id}7dfg0jd80986sfjfofg', [usuarioController::class, "datosUsuario"])->name('conf.usuario.consultar');
+    Route::post('/usuarios/modificar-usuarios',[usuarioController::class, "jq_modUsuario"]);
+    Route::post('/usuarios/modificando-usuarios', [usuarioController::class, "update"])->name('conf.usuario.modificar');
+    Route::post('/usuarios/desactivarUsuario', [usuarioController::class, "jq_desactivarUsuario"]);
 });

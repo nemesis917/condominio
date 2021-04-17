@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Vivienda;
 use App\Models\Empresa;
 use App\Models\Edificio;
+use App\Models\User;
 use DataTables;
 
 class viviendaController extends Controller
@@ -29,16 +30,35 @@ class viviendaController extends Controller
 
     public function actualizarVivienda(Request $request)
     {
+
+        $request->validate([
+            'cargarCorreoMod' => 'required|max:60',
+            'cargarNumeroInmuebleMod' => 'required|max:10',
+            'cargarNombrePropietarioMod' => 'required|max:30',
+            'cargarApellidoPropietarioMod' => 'required|max:30',
+            'cargarEstadoInmuebleMod' => 'required|max:3',
+            'cargarAlicuotaMod' => 'required|max:14',
+            'cargarGastosMod' => 'required|max:13|between:0,9999999999.99',
+            'cargarTlfMovilMod' => 'required|max:12',
+            'cargarTlfLocalMod' => 'required|max:12',
+            'cargarEdificioMod' => 'required|max:11'
+            
+        ]);
+
         $vivienda = Vivienda::find($request->idMax);
         $edificio = Edificio::find( $request-> cargarEdificioMod );
-
+        $correoViejo = $vivienda->correo;
+        $oldUser =  User::select()->where('email', $correoViejo)->get();
+        $user = User::select()->where('email', $request->cargarCorreoMod)->get();
+        $oldUserCount = sizeof($oldUser);
+        $userCount = sizeof($user);
         $empresa_id = $request->idEmp;
         $edificio_id = $request->idEdf;
 
         $vivienda->correo = $request->cargarCorreoMod;
-        $vivienda->num_inmueble = $request->cargarNumeroInmuebleMod;
-        $vivienda->nombre = $request->cargarNombrePropietarioMod;
-        $vivienda->apellido = $request->cargarApellidoPropietarioMod;
+        $vivienda->num_inmueble = strtoupper($request->cargarNumeroInmuebleMod);
+        $vivienda->nombre = ucfirst($request->cargarNombrePropietarioMod);
+        $vivienda->apellido = ucfirst($request->cargarApellidoPropietarioMod);
         $vivienda->estado_inmueble = $request->cargarEstadoInmuebleMod;
         $vivienda->alicuota = $request->cargarAlicuotaMod;
         $vivienda->gastos_administracion = $request->cargarGastosMod;
@@ -49,10 +69,24 @@ class viviendaController extends Controller
         $vivienda->updated_at = now();
         $res = $vivienda->update();
 
+        if ($oldUserCount == 0 AND $userCount == 0) {
+            # No hagas nada supongo
+        } elseif ($oldUserCount == 0 AND $userCount == 1) {
+            $vivienda->usuario()->attach($user[0]->id);
+        } elseif($oldUserCount == 1 AND $userCount == 1) {
+            $vivienda->usuario()->updateExistingPivot($oldUser[0]->id, ['user_id' => $user[0]->id ]);
+        } elseif($oldUserCount == 1 AND $userCount == 0) {
+            $vivienda->usuario()->detach($oldUser[0]->id);
+        } else {
+            dd("Estresate porque algo esta mal en tu logica");
+        }
+
+
         if ($res) {
             $id_empresa = $request->empresaMod;
 
             $edificio->empresa()->updateExistingPivot($request->cargarEdificioMod, ['empresa_id' => $id_empresa ]);
+            
             return redirect()->route('vivienda.index')->with('mensaje', "1");
         } else {
             return redirect()->route('vivienda.index')->with('mensaje', "2"); 
@@ -113,12 +147,14 @@ class viviendaController extends Controller
             
         ]);
 
+        $user = User::select()->where('email', $request->cargarCorreo)->get();
+
         $viv = new Vivienda;
 
-        $viv->correo = $request->cargarCorreo;
-        $viv->num_inmueble = $request->cargarNumeroInmueble;
-        $viv->nombre = $request->cargarNombrePropietario;
-        $viv->apellido = $request->cargarApellidoPropietario;
+        $viv->correo = strtolower($request->cargarCorreo);
+        $viv->num_inmueble = strtoupper($request->cargarNumeroInmueble);
+        $viv->nombre = ucfirst($request->cargarNombrePropietario);
+        $viv->apellido = ucfirst($request->cargarApellidoPropietario);
         $viv->estado_inmueble = $request->cargarEstadoInmueble;
         $viv->alicuota  = $request->cargarAlicuota;
         $viv->gastos_administracion = $request->cargarGastos;
@@ -127,6 +163,11 @@ class viviendaController extends Controller
         $viv->edificio_id = $request->cargarEdificio;
 
         $save = $viv->save();
+
+        if(count($user) != 0){
+            $viv->usuario()->attach($user[0]->id);
+        }
+        
         return response()->json($save);
 
     }

@@ -31,5 +31,9 @@ class Vivienda extends Model
         return $this->nombre . ' ' . $this->apellido;
     }
 
+    public function usuario()
+    {
+        return $this->belongsToMany('App\Models\User')->withTimestamps();
+    }
 
 }

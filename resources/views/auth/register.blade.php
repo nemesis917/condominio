@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>Administración de condominio</title>
-        <meta name="description" content="">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
@@ -111,6 +111,7 @@
                     <div style="margin-top: 40px"></div>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
+
                         @if ($errors->any())
                             <div>
                                 algo no esta bien
@@ -119,19 +120,19 @@
                         <!-- Name -->
                         <div>
                             <label for="">Ingrese su nombre:</label>
-                            <input id="name" class="form-control" type="text" name="name" required>
+                            <input id="name" class="form-control" type="text" name="name" placeholder="Coloque su nombre"  required>
                         </div>
 
                         <!--Lastname-->
                         <div>
                             <label for="">Ingrese su apellido:</label>
-                            <input id="lastname" class="form-control" type="text" name="lastname" required>
+                            <input id="lastname" class="form-control" type="text" name="lastname" placeholder="Coloque su apellido"  required>
                         </div>
 
                         <!-- Email Address -->
                         <div>
                             <label for="">Ingrese su correo:</label>                    
-                            <input id="email" class="form-control" type="email" name="email" required />
+                            <input id="email" class="form-control" type="email" name="email" placeholder="ejemplo@ejemplo"  required />
                         </div>
                     
                         <!-- Password -->
@@ -140,6 +141,7 @@
                             <input id="password" class="form-control"
                                             type="password"
                                             name="password"
+                                            placeholder="Min 5 caracteres" 
                                             required autocomplete="new-password" />
                         </div>
                     
@@ -148,11 +150,12 @@
                             <label for="">Confirme su contraseña:</label>
                             <input id="password_confirmation" class="form-control"
                                             type="password"
+                                            placeholder="Ambas claves deben de ser identicas" 
                                             name="password_confirmation" required />
                         </div>
                     
                         <div class="flex items-center justify-end mt-4">
-                            <input type="submit" value="Registrar" class="btn btn-primary">
+                            <input type="submit" value="Registrar" id="registrar" class="btn btn-primary" disabled="disabled">
                         </div>
                     </form>
                     <br>
@@ -313,5 +316,6 @@
     <script src="{{ asset('web/assets/js/main.js') }}"></script>
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('web/js/register.js') }}"></script>
     </body>
 </html>
