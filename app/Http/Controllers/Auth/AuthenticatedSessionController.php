@@ -32,6 +32,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        //La unica manera que encontre de evitar el login de un usuario inactivo
+        if (\Auth::user()->estado == "inactivo") {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+        }
+
         return redirect(RouteServiceProvider::HOME);
     }
 

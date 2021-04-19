@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Vivienda;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use DataTables;
 
 class usuarioController extends Controller
@@ -137,30 +138,18 @@ class usuarioController extends Controller
             ->leftJoin('edificio_empresa', 'edificio_empresa.edificio_id', '=', 'edificio.id')
             ->leftJoin('empresa', 'empresa.id', '=', 'edificio_empresa.empresa_id')
             ->where('users.id', $id)
-            ->where('users.estado', 'activo')
             ->get();
 
         return view('system.config.usuarios.consultar')->with('user', $user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function buscarDesactivados()
     {
-        //
+        return view('system.config.usuarios.desactivados');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request)
     {
 
@@ -251,6 +240,44 @@ class usuarioController extends Controller
         }
         
     }
+
+    public function jq_usuarioDesactivado()
+    {
+        $query = User::select(
+            'id',
+            'name',
+            'lastname',
+            'email',
+            'nivel_acceso'
+            )->where('estado', "inactivo")->get();
+        
+        return Datatables::of($query)
+        ->addIndexColumn()
+        ->addColumn('btn', 'system.config.usuarios.btn.btnDesactivar')
+        ->rawColumns(['btn'])
+        ->make(true);
+    }
+
+    public function jq_eliminandoUsuario(Request $request)
+    {
+        $user = User::find($request->id);
+
+        $val = DB::table('user_vivienda')->where('user_id',$request->id)->get();
+        if($val)
+        {
+            foreach ($val as $key) {
+                DB::table('user_vivienda')->where('user_id',$key->id)->delete();
+            }
+        }
+
+        $res = $user->delete();
+
+        return response()->json(1);
+
+
+    }
+
+
 
 
 }

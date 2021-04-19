@@ -78,4 +78,7 @@ Route::group(['prefix' => 'configuracion','middleware' => ['auth']], function ()
     Route::post('/usuarios/modificar-usuarios',[usuarioController::class, "jq_modUsuario"]);
     Route::post('/usuarios/modificando-usuarios', [usuarioController::class, "update"])->name('conf.usuario.modificar');
     Route::post('/usuarios/desactivarUsuario', [usuarioController::class, "jq_desactivarUsuario"]);
+    Route::get('/usuarios/usuario-desactivado', [usuarioController::class, "buscarDesactivados"])->name('conf.usuario.buscarDesactivados');
+    Route::get('/usuarios/usuarios-desactivados', [usuarioController::class, "jq_usuarioDesactivado"]);
+    Route::post('/usuarios/usuarios-eliminado', [usuarioController::class, "jq_eliminandoUsuario"]);
 });

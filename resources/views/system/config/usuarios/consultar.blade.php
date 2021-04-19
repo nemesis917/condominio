@@ -50,7 +50,7 @@ Bienvenido al sistema
                   <!-- /.row -->
                 </div>
             </div>
-            <a href="{{ route('conf.usuario.index') }}"><button class="btn btn-primary btn-lg btn-block"><i class="bi bi-arrow-bar-left"></i> Regresar</button></a>
+            <a href="{{ url()->previous() }}"><button class="btn btn-primary btn-lg btn-block"><i class="bi bi-arrow-bar-left"></i> Regresar</button></a>
         </div>
         <div class="col-md-6">
         @if ( $user[0]->direccion && $user[0]->edificio_id )

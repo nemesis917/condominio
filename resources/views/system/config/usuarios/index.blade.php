@@ -25,7 +25,18 @@ Configuración de usuarios
                 <div class="icon">
                     <i class="fas fa-user-check"></i>
                 </div>
-            </div>       
+            </div>     
+            <a href="{{ route('conf.usuario.buscarDesactivados') }}">
+              <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>Reactivar<br>usuario</h3>
+  
+                </div>
+                <div class="icon">
+                  <i class="fas fa-user-slash"></i>
+                </div>
+              </div>    
+            </a>
         </div>
         <div class="col-md-8">
           <div class="card">
