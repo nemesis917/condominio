@@ -118,7 +118,7 @@ $(document).ready(function(){
                 let arreglo = ['<option value="">Seleccione...</option>'];
     
                 for (let index = 0; index < comp.length; index++) {
-                    arreglo.push('<option value="' + comp[index].id + '">' + comp[index].nombre_edificio + '</option>');
+                    arreglo.push('<option value="' + comp[index].id + '">' + comp[index].id + ' - ' + comp[index].nombre_edificio + '</option>');
                 }
                 $('#cargarEdificio').html(arreglo);
                 $('#cargarEdificioMod').html(arreglo);

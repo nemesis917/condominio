@@ -16,6 +16,60 @@ Consultar las viviendas
 
 @section('body')
 <div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-12">
+            <div class="info-box bg-danger">
+              <span class="info-box-icon"><i class="far fa-money-bill-alt"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">ALICUOTA</span>
+                <span class="info-box-number" id="alic">0</span>
+
+                <div class="progress">
+                  <div class="progress-bar" id="porcAli" style="width: 0%"></div>
+                </div>
+                <span class="progress-description">
+                    &nbsp;
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="col-md-4 col-sm-4 col-12">
+            <div class="info-box bg-success">
+              <span class="info-box-icon"><i class="far fa-money-bill-alt"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">ALICUOTA</span>
+                <span class="info-box-number" id="alic">0</span>
+
+                <div class="progress">
+                  <div class="progress-bar" id="porcAli" style="width: 0%"></div>
+                </div>
+                <span class="progress-description">
+                    &nbsp;
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="col-md-4 col-sm-4 col-12">
+            <div class="info-box bg-info">
+              <span class="info-box-icon"><i class="fa fa-home"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">CANTIDAD DE VIVIENDAS</span>
+                <h2><span class="info-box-number" style="padding-top: 2px;"><div id="cantViv">0 viviendas</div></span></h2>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+    </div>
+</div>
+<div class="container">
     <div class="row base">
         <div class="col-md-4">
             <form method="post">
@@ -90,42 +144,6 @@ Consultar las viviendas
             </form>
         </div>
         <div class="col-md-8">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-12">
-                    <div class="info-box bg-success">
-                      <span class="info-box-icon"><i class="far fa-money-bill-alt"></i></span>
-        
-                      <div class="info-box-content">
-                        <span class="info-box-text">ALICUOTA</span>
-                        <span class="info-box-number" id="alic">0</span>
-        
-                        <div class="progress">
-                          <div class="progress-bar" id="porcAli" style="width: 0%"></div>
-                        </div>
-                        <span class="progress-description">
-                            &nbsp;
-                        </span>
-                      </div>
-                      <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-                <div class="col-md-6 col-sm-6 col-12">
-                    <div class="info-box bg-info">
-                      <span class="info-box-icon"><i class="fa fa-home"></i></span>
-        
-                      <div class="info-box-content">
-                        <span class="info-box-text">CANTIDAD DE VIVIENDAS</span>
-                        <h2><span class="info-box-number" style="padding-top: 2px;"><div id="cantViv">0 viviendas</div></span></h2>
-        
- 
-
-                      </div>
-                      <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-            </div>
             <section class="content">
                 <div class="card">
 
@@ -262,14 +280,6 @@ Consultar las viviendas
         </script>
     @endif
 @endif
-
-
-
-
-
-
-
-
 @endsection
 @section('javascript')
 <script src="{{ asset('system/vivienda/js/vivienda.js') }}"></script>
