@@ -18,23 +18,15 @@ Consultar las viviendas
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-sm-4 col-12">
-            <div class="info-box bg-danger">
-              <span class="info-box-icon"><i class="far fa-money-bill-alt"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">ALICUOTA</span>
-                <span class="info-box-number" id="alic">0</span>
-
-                <div class="progress">
-                  <div class="progress-bar" id="porcAli" style="width: 0%"></div>
+            <div class="info-box bg-danger" data-toggle="modal" data-target="#cargarArchivos">
+                <span class="info-box-icon"><i class="fas fa-file-excel"></i></span>
+                  <div class="info-box-content">
+                  <span class="info-box-text">CARGA MASIVA DE USUARIOS</span>
+                  <h2><span class="info-box-number" style="padding-top: 2px;"><div id="excel">en Excel</div></span></h2>
                 </div>
-                <span class="progress-description">
-                    &nbsp;
-                </span>
+                <!-- /.info-box-content -->
               </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
+              <!-- /.info-box -->
         </div>
         <div class="col-md-4 col-sm-4 col-12">
             <div class="info-box bg-success">
@@ -248,18 +240,52 @@ Consultar las viviendas
 
         </div>
             <div class="modal-footer">
-                {{-- <button type="button" class="btn btn-secondary btn-lg btn-block" data-dismiss="modal">Close</button> --}}
                 <button type="button" data-dismiss="modal" class="btn btn-secondary  btn-lg "  style="margin-top:8px; margin-button:8px;">Cerrar</button>
                 <input type="submit" class="btn btn-warning  btn-lg " maxlength="" id="cargarFormularioMod" style="margin-top:8px; margin-button:8px;" value="Modificar">
             </div>
-
-            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button> --}}
-            </div>
+        </div>
         </form>
     </div>
     </div>
   </div>
+
+
+  <div class="modal fade" id="cargarArchivos" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Cargar archivo formato Excel</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body ">
+          <div class="row">
+            <div class="col-md-2"><i class="fas fa-file-excel" style="font-size:7em; color: #13682f; text-align:center; padding-bottom:;15px;"></i></div>
+            <div class="col-md-10">
+                <p style="text-align: justify; padding-left:20px;">
+                    Si desea descargar nuestro modelo en Excel para llenar el formulario <b><a href="{{ url('downloads/carga-de-viviendas.xlsx') }}">presione aquí</a></b>.
+                </p>
+                <form action="{{ route('vivienda.cargar.excel') }}" method="post" enctype="multipart/form-data" accept="application/xls, .xlsx" style="text-align: justify; padding-left:20px;" aria-placeholder="agregue archivo">
+                    @csrf
+                    @if (Session::has('mensaje2'))
+                        <script>alert("Si le llego el mensaje, asumo que todo va machete")</script>
+                    @endif
+                    <input type="file" name="file" id="file"><br><br>
+                    <input type="submit" value="Importar viviendas" class="btn btn-success">
+                </form>
+            </div>
+          </div>
+        </div>
+        {{-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div> --}}
+      </div>
+    </div>
+  </div>
+
+
 
 @if (session('mensaje'))
     @if (session('mensaje') == 1)

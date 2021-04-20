@@ -7,7 +7,11 @@ use App\Models\Vivienda;
 use App\Models\Empresa;
 use App\Models\Edificio;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\usersExport;
+use App\Imports\viviendaImportar;
 use DataTables;
+
 
 class viviendaController extends Controller
 {
@@ -201,6 +205,22 @@ class viviendaController extends Controller
         return response()->json($salvar);
 
     }
+
+
+//-------------------  EXCEL  -----------------------
+
+    public function subirExcel(Request $request)
+    {
+        $file = $request->file('file');
+        Excel::import(new viviendaImportar, $file);
+
+        return back()->with('mensaje2', 1);
+    }
+
+    // public function bajarExcel()
+    // {
+    //     return Excel::download(new UsersExport, 'descarga-de-prueba.xlsx');
+    // }
 
 
 

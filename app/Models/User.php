@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,4 +48,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany('App\Models\Vivienda')->withTimestamps();
     }
+
+    public static function exportExcelUsers()
+    {
+        $usuario = DB::table('users')->select('id', 'name', 'lastname', 'email')->get()->toArray();
+        return $usuario;
+    }
+
 }

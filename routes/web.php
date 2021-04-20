@@ -67,6 +67,8 @@ Route::group(['prefix' => 'sistema/viviendas','middleware' => ['auth']], functio
     Route::get('/ajax/modificar/{id}d34h765{id2}', [viviendaController::class, "jq_modificarVivienda"]);
     Route::post('/modificar/d34h765', [viviendaController::class, "actualizarVivienda"])->name('vivienda.update');
     Route::post('/ajax/eliminar/2464568778', [viviendaController::class, "jq_eliminarVivienda"]);
+    // Route::get('/descargar-excel', [viviendaController::class, "bajarExcel"])->name('vivienda.descargar.excel');
+    Route::post('/cargar-excel-viviendas', [viviendaController::class, "subirExcel"])->name('vivienda.cargar.excel');
     //Route::get()->name();
 });
 
@@ -81,4 +83,5 @@ Route::group(['prefix' => 'configuracion','middleware' => ['auth']], function ()
     Route::get('/usuarios/usuario-desactivado', [usuarioController::class, "buscarDesactivados"])->name('conf.usuario.buscarDesactivados');
     Route::get('/usuarios/usuarios-desactivados', [usuarioController::class, "jq_usuarioDesactivado"]);
     Route::post('/usuarios/usuarios-eliminado', [usuarioController::class, "jq_eliminandoUsuario"]);
+
 });
