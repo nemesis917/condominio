@@ -21,7 +21,8 @@ class Vivienda extends Model
         'alicuota',
         'gastos_administracion',
         'telefono_oficina',
-        'telefono_habitacion'        
+        'telefono_habitacion',
+        'edificio_id'        
     ];
 
     protected $appends = ['nombre_completo'];
