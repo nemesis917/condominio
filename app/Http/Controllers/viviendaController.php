@@ -59,7 +59,7 @@ class viviendaController extends Controller
         $empresa_id = $request->idEmp;
         $edificio_id = $request->idEdf;
 
-        $vivienda->correo = $request->cargarCorreoMod;
+        $vivienda->correo = strtolower($request->cargarCorreoMod);
         $vivienda->num_inmueble = strtoupper($request->cargarNumeroInmuebleMod);
         $vivienda->nombre = ucfirst($request->cargarNombrePropietarioMod);
         $vivienda->apellido = ucfirst($request->cargarApellidoPropietarioMod);

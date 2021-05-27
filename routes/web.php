@@ -6,6 +6,7 @@ use App\Http\Controllers\empresaController;
 use App\Http\Controllers\edificioController;
 use App\Http\Controllers\viviendaController;
 use App\Http\Controllers\usuarioController;
+use App\Http\Controllers\gastosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,6 +74,19 @@ Route::group(['prefix' => 'sistema/viviendas','middleware' => ['auth']], functio
 });
 
 Route::group(['prefix' => 'configuracion','middleware' => ['auth']], function () {
+    
+    Route::get('/', function(){
+        return view('configuration.index');
+    })->name('conf.index');
+    
+    Route::get('/gastos', [gastosController::class, "index"])->name('conf.gastos.index');
+    Route::post('/gastos-unidad', [gastosController::class, "cargarUnDato"])->name('conf.gastos.cargar-unidad');
+    Route::get("/gastos-generales", [gastosController::class, "jq_gastos"]);
+    
+
+
+
+
     Route::get('/usuarios/usuario', [usuarioController::class, "index"])->name('conf.usuario.index');
     Route::post('/usuarios/guardarUnUsuario', [usuarioController::class, "store"])->name('conf.usuario.guardar');
     Route::get('/usuarios/lista-usuarios',[usuarioController::class, "jq_usuario"]);
@@ -83,5 +97,7 @@ Route::group(['prefix' => 'configuracion','middleware' => ['auth']], function ()
     Route::get('/usuarios/usuario-desactivado', [usuarioController::class, "buscarDesactivados"])->name('conf.usuario.buscarDesactivados');
     Route::get('/usuarios/usuarios-desactivados', [usuarioController::class, "jq_usuarioDesactivado"]);
     Route::post('/usuarios/usuarios-eliminado', [usuarioController::class, "jq_eliminandoUsuario"]);
+    
 
 });
+

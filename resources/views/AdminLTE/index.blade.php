@@ -153,11 +153,11 @@
 
           <li class="nav-header">Ajustes</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
+            <a href="{{ route('conf.index') }}" class="nav-link  {{ ! Route::is('conf.index') ?: 'active' }}">
+              <i class=" nav-icon fas fa-cogs"></i>
               <p>
                 Configuración
-                <span class="badge badge-info right">2</span>
+                {{-- <span class="badge badge-info right">2</span> --}}
               </p>
             </a>
           </li>
