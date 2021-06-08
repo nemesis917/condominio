@@ -2,7 +2,9 @@
 @section('titulo')
 Cargar gastos
 @endsection
-
+@section("css")
+<script src="{{ asset('plugins/numeric/jquery.numeric.js') }}"></script>
+@endsection
 @section('cabIzquierda')
 <h1 class="m-0 text-dark">Cargar gastos comunes y no comunes</h1>
 @endsection
@@ -14,20 +16,24 @@ Cargar gastos
 @section('body')
 <div class="container">
     <div class="row base">
-        <div class="col-12 col-sm-3 col-md-3" data-toggle="modal" data-target="#cargar-gasto">
-          <div class="info-box">
-            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-money-bill-wave-alt"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-number">Cargar</span>
-              <span class="info-box-text">
-                un gasto
-              </span>
-            </div>
-            <!-- /.info-box-content -->
+          <div class="col-12 col-sm-3 col-md-3" data-toggle="modal" data-target="#cargar-gasto">
+            <a href="#" style="color: black; text-decoration: none;">
+              <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-money-bill-wave-alt"></i></span>
+    
+                <div class="info-box-content">
+                  <span class="info-box-number">Cargar</span>
+                  <span class="info-box-text">
+                    un gasto
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+            </a>
+            <!-- /.info-box -->
           </div>
-          <!-- /.info-box -->
-        </div>
+
         <div class="col-12 col-sm-3 col-md-3">
           <div class="info-box">
             <span class="info-box-icon elevation-1" style="background: #d17224"><i class="fas fa-users"></i></span>
@@ -63,15 +69,17 @@ Cargar gastos
         <div class="clearfix hidden-md-up"></div>
 
         <div class="col-12 col-sm-3 col-md-3" data-toggle="modal" data-target="#gasto-masivo">
-          <div class="info-box">
-            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-file-excel"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-number">Carga de datos</span>
-              <span class="info-box-text">mediante Excel </span>
+          <a href="#" style="color: black; text-decoration: none;">
+            <div class="info-box">
+              <span class="info-box-icon bg-success elevation-1"><i class="fas fa-file-excel"></i></span>
+  
+              <div class="info-box-content">
+                <span class="info-box-number">Carga de datos</span>
+                <span class="info-box-text">mediante Excel </span>
+              </div>
+              <!-- /.info-box-content -->
             </div>
-            <!-- /.info-box-content -->
-          </div>
+          </a>
           <!-- /.info-box -->
         </div>
 
@@ -145,10 +153,10 @@ Cargar gastos
               <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio" value="gasto2">
               <label for="customRadio2" class="custom-control-label">Gastos no comunes</label>
             </div> 
-      </div>
+          </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Cargar</button>
+          <button type="submit" id="cargarUno" class="btn btn-primary">Cargar</button>
         </div>
         </form>
       </div>
@@ -161,13 +169,30 @@ Cargar gastos
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Titulo</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Carga de datos mediante EXCEL</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ......
+      <div class="modal-body" style="text-align: justify;">
+        <p>Si desea descargar la plantilla para la carga masiva de vienes comunes y no comunes, puede hacer la <a href="{{ url('downloads/cargar_gastos.xlsx') }}">descarga aqui</a> </p>
+        <p>Cabe destacar que en el campo de la columna "Tipo de gastos" se debe de definir usando numeros de la siguiente manera. </p>
+        <ul>
+          <li>1 para Gastos comunes</li>
+          <li>2 para gastos no comunes</li>
+        </ul>
+        No debe de escribirse debido a que se debe de mantener un estandar para las cargas masivas, y este campo en especifico podria generar gran confusión en los usuarios. <br>
+        <br>
+        <form action="{{ route('config.gastos.importar') }}" method="post" accept="application/xls, .xlsx" enctype="multipart/form-data" aria-placeholder="agregue archivo">
+          @csrf
+          <input type="file" name="file" id="carga" required>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <input type="submit" class="btn btn-primary" value="cargar masivamente">
+            <br>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -183,12 +208,20 @@ Cargar gastos
                 'success'
                 )
         </script>
-    @else
+    @elseif(session('mensaje') == 2)
         <script>
                 Swal.fire(
                     'Hubo un error',
                     'La información no fue salvada',
                     'error'
+                )
+        </script>
+    @elseif(session('mensaje') == 3)
+        <script>
+                Swal.fire(
+                    'Se ha cargado',
+                    'la información de manera masiva',
+                    'success'
                 )
         </script>
     @endif

@@ -30,6 +30,18 @@ $(document). ready(function(){
         "info": false
     });
 
+    $("#cargarUno").click(function(){
+        alert(" =) ");
+    });
+
+
+
+
+
+    $(document).on('click', '#modVivienda', function(){
+        alert( this.value );
+    });
+
 
 
 });

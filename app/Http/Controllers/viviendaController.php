@@ -211,7 +211,7 @@ class viviendaController extends Controller
 
     public function subirExcel(Request $request)
     {
-        $file = $request->file('file');
+        $file = $request->file('file')->getRealPath();
         Excel::import(new viviendaImportar, $file);
 
         return back()->with('mensaje2', 1);

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Gasto;
+use App\Imports\gastosImport;
 use DataTables;
 
 class gastosController extends Controller
@@ -107,6 +109,15 @@ class gastosController extends Controller
         //
     }
 
+// ------------------ Excel --------------------
+
+public function subirExcel(Request $request)
+{
+    $file = $request->file('file');
+    Excel::import(new gastosImport, $file);
+
+    return back()->with('mensaje', 3);
+}
 // ----------------- Jquery ------------------
 
     public function jq_gastos()

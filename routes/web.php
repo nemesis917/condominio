@@ -82,7 +82,7 @@ Route::group(['prefix' => 'configuracion','middleware' => ['auth']], function ()
     Route::get('/gastos', [gastosController::class, "index"])->name('conf.gastos.index');
     Route::post('/gastos-unidad', [gastosController::class, "cargarUnDato"])->name('conf.gastos.cargar-unidad');
     Route::get("/gastos-generales", [gastosController::class, "jq_gastos"]);
-    
+    Route::post("/importar-gastos", [gastosController::class, "subirExcel"])->name("config.gastos.importar");
 
 
 
